@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="red">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الخليل للصغار — أهلاً بكم</title>
+<meta name="description" content="مساحة ترفيهية وتربوية لأطفال الخليل: ألعاب، حكايات، وأنشطة إبداعية.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lalezar&family=Marhey:wght@300;400;500;600;700&family=Aref+Ruqaa:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ===== التطريز الخلفية ===== -->
+<div class="tatreez-layer" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+
+<!-- ===== الشريط العلوي ===== -->
+<header class="topbar">
+  <a class="brand" href="#">
+    <svg class="brand__mark" viewBox="0 0 100 100" aria-hidden="true">
+      <g fill="none" stroke="currentColor" stroke-width="6" stroke-linejoin="round">
+        <path d="M50 6 62 26 86 18 78 42 96 50 78 58 86 82 62 74 50 94 38 74 14 82 22 58 4 50 22 42 14 18 38 26Z"/>
+        <path d="M50 24 57 40 74 34 69 51 84 56 69 61 74 78 57 72 50 88 43 72 26 78 31 61 16 56 31 51 26 34 43 40Z" opacity=".55"/>
+        <circle cx="50" cy="50" r="9" fill="currentColor" stroke="none"/>
+      </g>
+    </svg>
+    <span class="brand__text">
+      <strong>الخليل للصغار</strong>
+      <em>مساحتنا الصغيرة، حكايات كبيرة</em>
+    </span>
+  </a>
+
+  <nav class="nav" aria-label="التنقل الرئيسي">
+    <a href="#hero">الرئيسية</a>
+    <a href="#about">عن المشروع</a>
+    <a href="#game">العب واختبر</a>
+  </nav>
+</header>
+
+<main>
+
+  <!-- ===== الواجهة الرئيسية ===== -->
+  <section class="hero" id="hero">
+    <div class="hero__halo" aria-hidden="true"></div>
+
+    <p class="hero__kicker" data-reveal="1">
+      <span class="dot"></span>
+      <span id="liveDate">جارٍ تحضير الصفحة…</span>
+    </p>
+
+    <h1 class="hero__title" data-reveal="2">
+      أهلاً بكم<br>
+      <span class="hero__accent">يا صغار الخليل</span>
+    </h1>
+
+    <p class="hero__greeting" data-reveal="3">
+      <span id="greetingText">أهلاً وسهلاً</span>
+    </p>
+
+    <p class="hero__lede" data-reveal="4">
+      مكان صغير يلّا فيه الصغار يلعبون ويتعلّمون: حكايات من الخليل القديمة،
+      ألعاب ذهنية، ورسم وتلوين بلا حدود.
+    </p>
+
+    <div class="hero__actions" data-reveal="5">
+      <a class="btn btn--solid" href="#game">ابدأ اللعب</a>
+      <a class="btn btn--ghost" href="#about">تعرّف علينا</a>
+    </div>
+
+    <!-- شريط التطريز الفاصل -->
+    <div class="tatreez-band" data-reveal="6" aria-hidden="true">
+      <span></span><span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span><span></span>
+    </div>
+  </section>
+
+  <!-- ===== عن المشروع ===== -->
+  <section class="about" id="about">
+    <header class="section-head" data-reveal="1">
+      <h2>عن المشروع</h2>
+      <p>ثلاثة أعمدة يقوم عليها المكان كله</p>
+    </header>
+
+    <div class="cards">
+      <article class="card" data-reveal="1">
+        <div class="card__num">٠١</div>
+        <h3>حكايات ودروس</h3>
+        <p>من及市场 الخليل القديم وحجاره، قصص قصيرة تُقرأ بصوت عالٍ مع الأطفال.</p>
+        <span class="card__tag">قصص</span>
+      </article>
+
+      <article class="card" data-reveal="2">
+        <div class="card__num">٠٢</div>
+        <h3>ألعاب ذهنية</h3>
+        <p>ألغاز وألعاب تركيز تنمّي الذكاء والمنطق والمرح في وقت واحد.</p>
+        <span class="card__tag">ألعاب</span>
+      </article>
+
+      <article class="card" data-reveal="3">
+        <div class="card__num">٠٣</div>
+        <h3>أنشطة إبداعية</h3>
+        <p>رسم وتطريز وبناء نماذج صغيرة بأيدٍ صغيرة وألوان كثيرة.</p>
+        <span class="card__tag">إبداع</span>
+      </article>
+    </div>
+  </section>
+
+  <!-- ===== قسم اللعب ===== -->
+  <section class="game" id="game">
+    <header class="section-head" data-reveal="1">
+      <h2>اجمع النجوم</h2>
+      <p>اضغط على النجوم الطائرة قبل ما تختفي — جمّع عشر نجوم لتحصل على وسام</p>
+    </header>
+
+    <div class="scoreboard">
+      <div class="score">
+        <span class="score__label">النجوم</span>
+        <span class="score__value" id="scoreCount">٠</span>
+      </div>
+      <div class="score">
+        <span class="score__label">الأفضل</span>
+        <span class="score__value" id="bestCount">٠</span>
+      </div>
+      <button class="btn btn--tiny" id="resetBtn" type="button">ابدأ من جديد</button>
+    </div>
+
+    <div class="playfield" id="playfield" aria-live="polite">
+      <!-- النجوم تُنشأ هنا بواسطة js/main.js -->
+    </div>
+
+    <div class="medal" id="medal" hidden>
+      <p>مبروك! هاد الوسام إلك 🎉</p>
+    </div>
+  </section>
+
+</main>
+
+<!-- ===== التذييل ===== -->
+<footer class="footer">
+  <p>الخليل للصغار — مساحة مفتوحة لكل طفل</p>
+  <p class="footer__muted">مبنية بحبّ، مرفوعة على GitHub</p>
+</footer>
+
+<!-- ===== اختيار نمط التطريز ===== -->
+<div class="palette" role="group" aria-label="لون التطريز">
+  <button class="palette__swatch is-active" data-theme-set="red"   type="button" style="--sw:#B33A2B" aria-label="أحمر"></button>
+  <button class="palette__swatch"           data-theme-set="blue"  type="button" style="--sw:#2B3A67" aria-label="أزرق"></button>
+  <button class="palette__swatch"           data-theme-set="green" type="button" style="--sw:#6E7B3C" aria-label="أخضر"></button>
+</div>
+
+<script src="js/main.js" defer></script>
+</body>
+</html>

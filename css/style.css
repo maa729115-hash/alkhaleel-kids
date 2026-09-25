@@ -1,0 +1,569 @@
+/* ============================================================
+   الخليل للصغار — Welcome Page
+   Aesthetic: "Stone & Thread"
+   مستوحى من التطريز الفلسطيني وحجر الخليل القديم
+   ============================================================ */
+
+/* ---------- 1. المتغيرات ---------- */
+:root {
+  /* الحجر */
+  --stone:      #F7F1E4;
+  --stone-2:    #EFE4CE;
+  --stone-3:    #E3D4B7;
+
+  /* الحبر */
+  --ink:        #241C2E;
+  --ink-soft:   #5B4E68;
+
+  /* خيوط التطريز */
+  --thread-1:   #B33A2B;
+  --thread-2:   #2B3A67;
+  --thread-3:   #6E7B3C;
+  --gold:       #D4A32C;
+
+  /* الخطوط */
+  --font-display: 'Lalezar', 'Noto Kufi Arabic', serif;
+  --font-body:    'Marhey', 'Segoe UI', sans-serif;
+  --font-script:  'Aref Ruqaa', serif;
+
+  /* المقاييس */
+  --shell:  min(1140px, 92vw);
+  --r-sm: 10px;
+  --r-md: 18px;
+  --r-lg: 30px;
+
+  /* الظلال */
+  --shadow-soft: 0 2px 4px rgba(36,28,46,.05), 0 10px 30px rgba(36,28,46,.07);
+  --shadow-lift: 0 6px 12px rgba(36,28,46,.08), 0 24px 50px rgba(36,28,46,.14);
+
+  /* أقنعة التطريز */
+  --x-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M3 3 29 29M29 3 3 29' stroke='%23000' stroke-width='8' stroke-linecap='round' fill='none'/%3E%3C/svg%3E");
+  --tile-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cg fill='none' stroke='%23000' stroke-width='8'%3E%3Cpath d='M4 4 28 28M28 4 4 28'/%3E%3Cpath d='M36 36 60 60M60 36 36 60'/%3E%3C/g%3E%3Cpath d='M32 6 42 16 32 26 22 16Z'/%3E%3Crect x='29' y='47' width='7' height='7'/%3E%3C/svg%3E");
+}
+
+html[data-theme="blue"]  { --thread-1:#2B3A67; --thread-2:#B33A2B; --thread-3:#D4A32C; }
+html[data-theme="green"] { --thread-1:#6E7B3C; --thread-2:#D4A32C; --thread-3:#B33A2B; }
+
+/* ---------- 2. الأساس ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--font-body);
+  font-size: clamp(1rem, .95rem + .3vw, 1.125rem);
+  line-height: 1.85;
+  color: var(--ink);
+  background: var(--stone);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 { margin: 0; line-height: 1.15; font-weight: 400; }
+p { margin: 0; }
+a { color: inherit; text-decoration: none; }
+
+::selection { background: var(--thread-1); color: var(--stone); }
+
+/* ---------- 3. طبقات الخلفية ---------- */
+.tatreez-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: .05;
+  background-color: var(--thread-1);
+  -webkit-mask-image: var(--tile-mask);
+          mask-image: var(--tile-mask);
+  -webkit-mask-size: 64px 64px;
+          mask-size: 64px 64px;
+  transition: background-color .5s ease;
+}
+
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: .3;
+  mix-blend-mode: multiply;
+}
+.grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.42'/%3E%3C/svg%3E");
+}
+
+body > *:not(.tatreez-layer):not(.grain) { position: relative; z-index: 2; }
+
+/* ---------- 4. الشريط العلوي ---------- */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  width: var(--shell);
+  margin-inline: auto;
+  padding: 1.6rem 0;
+}
+
+.brand { display: flex; align-items: center; gap: .8rem; }
+
+.brand__mark {
+  width: 42px; height: 42px;
+  color: var(--thread-1);
+  transition: color .5s ease, transform .6s cubic-bezier(.2,.8,.2,1);
+}
+.brand:hover .brand__mark { transform: rotate(45deg); }
+
+.brand__text { display: flex; flex-direction: column; line-height: 1.4; }
+.brand__text strong {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  letter-spacing: .01em;
+}
+.brand__text em {
+  font-style: normal;
+  font-size: .72rem;
+  color: var(--ink-soft);
+}
+
+.nav { display: flex; gap: .35rem; }
+
+.nav a {
+  position: relative;
+  padding: .5rem 1rem;
+  border-radius: 100px;
+  font-size: .9rem;
+  color: var(--ink-soft);
+  transition: color .3s ease, background-color .3s ease;
+}
+.nav a::after {
+  content: "";
+  position: absolute;
+  inset-inline: 1rem;
+  bottom: .3rem;
+  height: 2px;
+  background: var(--thread-1);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform .35s cubic-bezier(.2,.8,.2,1);
+}
+.nav a:hover { color: var(--ink); background: rgba(255,255,255,.6); }
+.nav a:hover::after { transform: scaleX(1); }
+
+/* ---------- 5. الواجهة الرئيسية ---------- */
+.hero {
+  width: var(--shell);
+  margin-inline: auto;
+  padding: clamp(2.5rem, 7vw, 5.5rem) 0 0;
+  text-align: center;
+}
+
+.hero__halo {
+  position: absolute;
+  top: -6rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(620px, 90vw);
+  aspect-ratio: 1;
+  z-index: -1;
+  background:
+    radial-gradient(circle at 50% 45%,
+      color-mix(in srgb, var(--thread-1) 26%, transparent) 0%,
+      color-mix(in srgb, var(--thread-2) 16%, transparent) 38%,
+      transparent 68%);
+  filter: blur(12px);
+  animation: breathe 9s ease-in-out infinite;
+}
+
+.hero__kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: .55rem;
+  padding: .4rem 1.1rem .4rem 1.3rem;
+  border: 1px solid var(--stone-3);
+  border-radius: 100px;
+  background: rgba(255,255,255,.66);
+  font-size: .82rem;
+  color: var(--ink-soft);
+  backdrop-filter: blur(6px);
+}
+.hero__kicker .dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--thread-3);
+  box-shadow: 0 0 0 0 color-mix(in srgb, var(--thread-3) 60%, transparent);
+  animation: ping 2.4s ease-out infinite;
+}
+
+.hero__title {
+  margin: 1.4rem 0 .4rem;
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 11vw, 7.5rem);
+  line-height: .95;
+  letter-spacing: -.01em;
+}
+.hero__accent {
+  display: inline-block;
+  color: var(--thread-1);
+  transition: color .5s ease;
+}
+.hero__accent::after {
+  content: "";
+  display: block;
+  height: 10px;
+  margin-top: .1em;
+  background-color: var(--gold);
+  -webkit-mask-image: var(--x-mask);
+          mask-image: var(--x-mask);
+  -webkit-mask-size: 44px 10px;
+          mask-size: 44px 10px;
+  -webkit-mask-repeat: repeat-x;
+          mask-repeat: repeat-x;
+  opacity: .9;
+}
+
+.hero__greeting {
+  font-family: var(--font-script);
+  font-size: clamp(1.3rem, 3.4vw, 1.9rem);
+  color: var(--thread-2);
+  transition: color .5s ease;
+}
+.hero__greeting span {
+  display: inline-block;
+  animation: sway 6s ease-in-out infinite;
+}
+
+.hero__lede {
+  max-width: 46ch;
+  margin: 1.2rem auto 0;
+  color: var(--ink-soft);
+}
+
+.hero__actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: .8rem;
+  margin-top: 2rem;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: .85rem 2.1rem;
+  border: 2px solid transparent;
+  border-radius: 100px;
+  font-family: var(--font-body);
+  font-size: .98rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: transform .25s cubic-bezier(.2,.8,.2,1),
+              box-shadow .25s ease,
+              background-color .25s ease,
+              color .25s ease;
+}
+.btn:active { transform: translateY(1px) scale(.985); }
+
+.btn--solid {
+  background: var(--ink);
+  color: var(--stone);
+  box-shadow: var(--shadow-soft);
+}
+.btn--solid:hover {
+  background: var(--thread-1);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lift);
+}
+
+.btn--ghost {
+  border-color: var(--stone-3);
+  background: rgba(255,255,255,.6);
+  color: var(--ink);
+}
+.btn--ghost:hover {
+  border-color: var(--thread-3);
+  color: var(--thread-3);
+  transform: translateY(-3px);
+}
+
+.btn--tiny {
+  padding: .5rem 1.2rem;
+  border-color: var(--stone-3);
+  background: transparent;
+  font-size: .84rem;
+}
+.btn--tiny:hover { border-color: var(--thread-1); color: var(--thread-1); }
+
+/* شريط التطريز الفاصل */
+.tatreez-band {
+  display: flex;
+  justify-content: center;
+  gap: .55rem;
+  margin-top: clamp(2.5rem, 6vw, 4rem);
+  padding-bottom: .5rem;
+  overflow: hidden;
+}
+.tatreez-band span {
+  width: 20px; height: 20px;
+  background-color: var(--thread-1);
+  -webkit-mask: var(--x-mask) center / contain no-repeat;
+          mask: var(--x-mask) center / contain no-repeat;
+}
+.tatreez-band span:nth-child(3n+2) { background-color: var(--thread-2); }
+.tatreez-band span:nth-child(3n+3) { background-color: var(--thread-3); }
+.tatreez-band span:nth-child(3n)   { border-radius: 50%; -webkit-mask-image: none; mask-image: none;
+  background: transparent;
+  border: 3px solid var(--gold); }
+
+/* ---------- 6. الأقسام ---------- */
+.about, .game {
+  width: var(--shell);
+  margin-inline: auto;
+  padding: clamp(3.5rem, 9vw, 6.5rem) 0 0;
+}
+
+.section-head { text-align: center; margin-bottom: 2.8rem; }
+.section-head h2 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5.5vw, 3.2rem);
+}
+.section-head h2::after {
+  content: "";
+  display: block;
+  width: 54px; height: 4px;
+  margin: .6rem auto 0;
+  border-radius: 4px;
+  background: linear-gradient(to left, var(--thread-1), var(--gold));
+}
+.section-head p { margin-top: .7rem; color: var(--ink-soft); font-size: .96rem; }
+
+/* ---------- 7. البطاقات ---------- */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.4rem;
+}
+
+.card {
+  position: relative;
+  overflow: hidden;
+  padding: 2rem 1.7rem 1.7rem;
+  border: 1px solid var(--stone-3);
+  border-radius: var(--r-lg);
+  background: rgba(255,255,255,.72);
+  backdrop-filter: blur(8px);
+  box-shadow: var(--shadow-soft);
+  transition: transform .4s cubic-bezier(.2,.8,.2,1),
+              box-shadow .4s ease,
+              border-color .4s ease;
+}
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0; inset-inline: 0;
+  height: 5px;
+  background: linear-gradient(to left, var(--thread-1), var(--gold), var(--thread-3));
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform .5s cubic-bezier(.2,.8,.2,1);
+}
+.card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lift); border-color: transparent; }
+.card:hover::before { transform: scaleX(1); }
+
+.card__num {
+  font-family: var(--font-display);
+  font-size: 2.6rem;
+  line-height: 1;
+  color: var(--stone-3);
+  transition: color .4s ease;
+}
+.card:hover .card__num { color: var(--thread-1); }
+
+.card h3 {
+  margin: .5rem 0 .6rem;
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+}
+.card p { font-size: .94rem; color: var(--ink-soft); }
+
+.card__tag {
+  display: inline-block;
+  margin-top: 1.1rem;
+  padding: .22rem .85rem;
+  border-radius: 100px;
+  background: color-mix(in srgb, var(--thread-3) 14%, transparent);
+  color: var(--thread-3);
+  font-size: .76rem;
+  font-weight: 600;
+}
+
+/* ---------- 8. قسم اللعب ---------- */
+.scoreboard {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem 2.2rem;
+  margin-bottom: 1.6rem;
+  padding: 1.1rem 1.6rem;
+  border: 1px solid var(--stone-3);
+  border-radius: 100px;
+  background: rgba(255,255,255,.72);
+  backdrop-filter: blur(8px);
+  width: fit-content;
+  margin-inline: auto;
+}
+.score { display: flex; align-items: baseline; gap: .5rem; }
+.score__label { font-size: .84rem; color: var(--ink-soft); }
+.score__value {
+  font-family: var(--font-display);
+  font-size: 1.7rem;
+  line-height: 1;
+  color: var(--thread-1);
+  min-width: 1.2ch;
+  text-align: center;
+  transition: transform .3s cubic-bezier(.2,.8,.2,1);
+}
+.score__value.is-bump { transform: scale(1.45); color: var(--gold); }
+
+.playfield {
+  position: relative;
+  height: clamp(280px, 42vh, 420px);
+  overflow: hidden;
+  border: 1px dashed var(--stone-3);
+  border-radius: var(--r-lg);
+  background:
+    radial-gradient(circle at 1px 1px, var(--stone-3) 1px, transparent 0) 0 0 / 22px 22px,
+    rgba(255,255,255,.5);
+}
+
+.star {
+  position: absolute;
+  width: var(--size, 42px);
+  height: var(--size, 42px);
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--gold);
+  cursor: pointer;
+  filter: drop-shadow(0 3px 6px rgba(36,28,46,.22));
+  animation:
+    drift var(--dur, 7s) ease-in-out var(--delay, 0s) infinite alternate,
+    spin var(--spin, 9s) linear infinite;
+  transition: transform .2s ease;
+}
+.star:hover { transform: scale(1.22) rotate(-8deg); }
+.star:focus-visible { outline: 3px dashed var(--thread-2); outline-offset: 4px; border-radius: 6px; }
+.star svg { width: 100%; height: 100%; display: block; fill: currentColor; }
+.star.is-hit { animation: pop .42s ease-out forwards; pointer-events: none; }
+
+.medal {
+  margin-top: 1.4rem;
+  padding: 1.1rem;
+  border-radius: var(--r-md);
+  background: color-mix(in srgb, var(--gold) 18%, transparent);
+  border: 1px dashed var(--gold);
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  animation: rise .7s cubic-bezier(.2,.7,.2,1) both;
+}
+
+/* ---------- 9. التذييل ---------- */
+.footer {
+  margin-top: clamp(4rem, 10vw, 7rem);
+  padding: 2.6rem 1.5rem 3.4rem;
+  border-top: 1px solid var(--stone-3);
+  text-align: center;
+  font-size: .92rem;
+}
+.footer__muted { margin-top: .3rem; font-size: .82rem; color: var(--ink-soft); }
+
+/* ---------- 10. مبدّل التطريز ---------- */
+.palette {
+  position: fixed;
+  bottom: 1.4rem;
+  inset-inline-start: 1.4rem;
+  z-index: 50;
+  display: flex;
+  gap: .55rem;
+  padding: .55rem;
+  border: 1px solid var(--stone-3);
+  border-radius: 100px;
+  background: rgba(255,255,255,.82);
+  backdrop-filter: blur(10px);
+  box-shadow: var(--shadow-soft);
+}
+.palette__swatch {
+  width: 26px; height: 26px;
+  padding: 0;
+  border: 2px solid transparent;
+  border-radius: 50%;
+  background: var(--sw);
+  cursor: pointer;
+  transition: transform .25s ease, border-color .25s ease;
+}
+.palette__swatch:hover { transform: scale(1.18); }
+.palette__swatch.is-active { border-color: var(--ink); transform: scale(1.18); }
+
+/* ---------- 11. حركات الظهور ---------- */
+[data-reveal] { opacity: 0; animation: rise .85s cubic-bezier(.2,.7,.2,1) forwards; }
+[data-reveal="1"] { animation-delay: .06s; }
+[data-reveal="2"] { animation-delay: .16s; }
+[data-reveal="3"] { animation-delay: .26s; }
+[data-reveal="4"] { animation-delay: .36s; }
+[data-reveal="5"] { animation-delay: .46s; }
+[data-reveal="6"] { animation-delay: .58s; }
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(26px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes drift {
+  from { transform: translate(0, 0)        rotate(0deg); }
+  to   { transform: translate(var(--dx, 30px), var(--dy, -40px)) rotate(var(--dr, 18deg)); }
+}
+@keyframes spin { to { rotate: 360deg; } }
+@keyframes pop {
+  0%   { transform: scale(1);   opacity: 1; }
+  45%  { transform: scale(1.7); opacity: 1; }
+  100% { transform: scale(0) rotate(220deg); opacity: 0; }
+}
+@keyframes breathe {
+  0%, 100% { transform: translateX(-50%) scale(1);    opacity: .9; }
+  50%      { transform: translateX(-50%) scale(1.08); opacity: 1; }
+}
+@keyframes ping {
+  0%   { box-shadow: 0 0 0 0 color-mix(in srgb, var(--thread-3) 55%, transparent); }
+  70%, 100% { box-shadow: 0 0 0 11px transparent; }
+}
+@keyframes sway {
+  0%, 100% { transform: translateY(0)     rotate(-.6deg); }
+  50%      { transform: translateY(-5px)  rotate(.6deg); }
+}
+
+/* ---------- 12. تفضيل الحركة المخفّضة ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+  }
+  [data-reveal] { opacity: 1; }
+  html { scroll-behavior: auto; }
+}
+
+/* ---------- 13. الشاشات الصغيرة ---------- */
+@media (max-width: 560px) {
+  .topbar { justify-content: center; text-align: center; }
+  .nav { order: 3; width: 100%; justify-content: center; }
+  .scoreboard { border-radius: var(--r-md); }
+  .palette { bottom: auto; top: .8rem; inset-inline-start: .8rem; }
+}
